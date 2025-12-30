@@ -27,27 +27,6 @@ struct FullPayload {
     payload: Payload
 }
 
-impl Default for Payload {
-    fn default() -> Self {
-        Payload { 
-            asset: String::from(""), 
-            bio: String::from(""), 
-            condition_id: String::from(""), 
-            event_slug: String::from(""), 
-            icon: String::from(""), 
-            name: String::from(""), 
-            outcome: String::from(""), 
-            outcome_index: 0, 
-            price: 0.0, 
-            proxy_wallet: String::from(""), 
-            side: String::from(""), 
-            size: 0.0, 
-            timestamp: 1, 
-            title: String::from(""), 
-            transaction_hash: String::from("") 
-        }
-    }
-}
 
 pub fn check(msg: Message, against: &HashMap<String, f64>) -> (bool, Option<String>, Option<String>) {
     let text_message: Utf8Bytes = msg.into_text().unwrap();
@@ -70,7 +49,7 @@ pub fn check(msg: Message, against: &HashMap<String, f64>) -> (bool, Option<Stri
         }
         Err(e) => {
             eprintln!("Failed to parse message: {} {}", e, &text_string);
-            (false, Some(Payload::default().asset), None)
+            (false, None, None)
         }
     }
 }
