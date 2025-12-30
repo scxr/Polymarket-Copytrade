@@ -49,7 +49,7 @@ fn load_targets(path: &str) -> Result<HashMap<String, f64>, Box<dyn std::error::
         };
 
         println!("Adding target {}: {} with size: {}", label, key, size);
-        targets.insert(key, size);
+        targets.insert(key.to_lowercase(), size);
     }
 
     Ok(targets)
