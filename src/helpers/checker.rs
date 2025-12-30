@@ -56,6 +56,9 @@ pub fn check(msg: Message, against: &HashMap<String, f64>) -> (bool, Option<Stri
         Ok(msg_json) => {
             let address =  msg_json.payload.proxy_wallet.to_lowercase();
             let username = msg_json.payload.name.to_lowercase();
+            if msg_json.payload.side != "Buy" {
+                return (false, None, None);
+            }
             if against.contains_key(&username) {
                 (true,  Some(msg_json.payload.asset), Some(username))
             } else if against.contains_key(&address) {
